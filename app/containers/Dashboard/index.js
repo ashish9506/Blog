@@ -1,55 +1,27 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- */
+/* eslint-disable react/prop-types */
 
-import {
-  Box,
-  Button,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  makeStyles,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import React from 'react';
+import { Box } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import history from 'utils/history';
+import { MainAppBar } from './appbar';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
-export default function Dashboard() {
-  const classes = useStyles();
+function Dashboard(props) {
+  useEffect(() => {
+    history.replace('/');
+  }, []);
   return (
     <>
-      <Box>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Tech Blogs
-            </Typography>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
+      <div>
+        <Helmet>
+          <title>TechBlog - Home</title>
+        </Helmet>
+        <Box>
+          <MainAppBar {...props} />
+        </Box>
+      </div>
     </>
   );
 }
+
+export default Dashboard;
